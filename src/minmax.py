@@ -23,7 +23,7 @@ def min_yr():
     calculate(np.minimum, consts.MIN_YEARS_DIR, scope='years')
 
 
-def calculate(func, out, scope='months'):
+def calculate(func, out_path, scope='months'):
     if func == np.maximum:
         year_val = np.zeros(shape=consts.ARRAY_SIZE)
 
@@ -31,7 +31,7 @@ def calculate(func, out, scope='months'):
         year_val = np.full(shape=consts.ARRAY_SIZE, fill_value=np.inf)
 
     if not hasattr(func, '__call__'):
-        raise ValueError('func object should be function.')
+        raise ValueError('func object should be a function.')
 
     for mth in consts.MONTHS:
         matrices = get_mat_month(mth)
@@ -42,7 +42,7 @@ def calculate(func, out, scope='months'):
             val = func(val, mat)
 
         if scope == 'months':
-            path = os.path.join(out, '%s.csv' % mth)
+            path = os.path.join(out_path, '%s.csv' % mth)
             frame = pd.DataFrame(data=val[1:, 1:],
                                  index=val[1:, 0],
                                  columns=val[0, 1:])
@@ -52,7 +52,7 @@ def calculate(func, out, scope='months'):
             year_val = func(year_val, val)
 
     if scope == 'years':
-        path = os.path.join(out, consts.YR_FILE)
+        path = os.path.join(out_path, consts.YR_FILE)
         frame = pd.DataFrame(data=year_val[1:, 1:],
                              index=year_val[1:, 0],
                              columns=year_val[0, 1:])

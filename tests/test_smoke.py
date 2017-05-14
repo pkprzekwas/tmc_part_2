@@ -1,7 +1,21 @@
+import subprocess
+
 import pytest
 
-from src import consts, matrix_getter
+from src import consts, matrix_getter, helpers, main
 from tests.helpers import gen_days
+
+
+@pytest.mark.slow
+def test_main():
+    main.main()
+    generated_files = subprocess.check_output(
+        ['./cnt_output.sh', consts.OUT_DIR], cwd=consts.TEST_DIR)
+    assert int(generated_files) == 39
+    subprocess.call(['./clean_csv.sh'], cwd=consts.PROJECT_DIR)
+    generated_files = subprocess.check_output(
+        ['./cnt_output.sh', consts.OUT_DIR], cwd=consts.TEST_DIR)
+    assert int(generated_files) == 0
 
 
 def test_read_matrix(wind_matrix):
@@ -38,6 +52,11 @@ def test_year_data():
         matrices_for_month = matrix_getter.get_mat_month(month)
         matrices.extend(matrices_for_month)
     assert len(matrices) == 1255
+
+
+def test_get_all_dates():
+    dates = helpers.get_all_days()
+    assert len(dates) == 1255
 
 
 @pytest.mark.skip

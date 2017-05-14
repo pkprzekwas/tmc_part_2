@@ -1,8 +1,10 @@
 import os
 
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(SRC_DIR, '..', 'data')
-OUT_DIR = os.path.join(SRC_DIR, '..', 'out')
+PROJECT_DIR = os.path.join(SRC_DIR, '..')
+DATA_DIR = os.path.join(PROJECT_DIR, 'data')
+TEST_DIR = os.path.join(PROJECT_DIR,'tests')
+OUT_DIR = os.path.join(PROJECT_DIR, 'out')
 OUT_MONTHS_DIR = os.path.join(OUT_DIR, 'months')
 OUT_YEARS_DIR = os.path.join(OUT_DIR, 'years')
 

@@ -3,8 +3,8 @@ import os
 
 import numpy as np
 
-from src.consts import DATA_DIR, LAST_CORRECT_DATE
-from src.helpers import extract_date
+from consts import DATA_DIR, LAST_CORRECT_DATE
+from helpers import extract_date
 
 
 def get_mat_day(day):

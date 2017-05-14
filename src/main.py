@@ -2,9 +2,10 @@ import sys
 
 from average import cnt_avg
 from minmax import max_mth, min_mth, min_yr, max_yr
+from helpers import get_all_days
 
 
-if __name__ == '__main__':
+def main():
     print('Python: {}'.format(sys.version))
 
     print('Counting average..')
@@ -21,3 +22,6 @@ if __name__ == '__main__':
 
     print('Done.')
 
+if __name__ == '__main__':
+    # main()
+    get_all_days()
