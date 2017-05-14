@@ -57,13 +57,3 @@ def test_year_data():
 def test_get_all_dates():
     dates = helpers.get_all_days()
     assert len(dates) == 1255
-
-
-@pytest.mark.skip
-def test_avg_speed():
-    assert 1
-
-
-@pytest.mark.skip
-def test_max_speed():
-    assert 1

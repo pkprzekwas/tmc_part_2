@@ -3,18 +3,22 @@ import os
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.join(SRC_DIR, '..')
 DATA_DIR = os.path.join(PROJECT_DIR, 'data')
-TEST_DIR = os.path.join(PROJECT_DIR,'tests')
+TEST_DIR = os.path.join(PROJECT_DIR, 'tests')
+
 OUT_DIR = os.path.join(PROJECT_DIR, 'out')
+OUT_DAYS_DIR = os.path.join(OUT_DIR, 'days')
 OUT_MONTHS_DIR = os.path.join(OUT_DIR, 'months')
 OUT_YEARS_DIR = os.path.join(OUT_DIR, 'years')
 
-YR_FILE = '201405-201505.csv'
-
+AVG_DAY_DIR = os.path.join(OUT_DAYS_DIR, 'avg')
+MAX_DAY_DIR = os.path.join(OUT_DAYS_DIR, 'max')
+MIN_DAY_DIR = os.path.join(OUT_DAYS_DIR, 'min')
 
 AVG_MONTHS_DIR = os.path.join(OUT_MONTHS_DIR, 'avg')
 MAX_MONTHS_DIR = os.path.join(OUT_MONTHS_DIR, 'max')
 MIN_MONTHS_DIR = os.path.join(OUT_MONTHS_DIR, 'min')
 
+YR_FILE = '201405-201505.csv'
 AVG_YEARS_DIR = os.path.join(OUT_YEARS_DIR, 'avg')
 MAX_YEARS_DIR = os.path.join(OUT_YEARS_DIR, 'max')
 MIN_YEARS_DIR = os.path.join(OUT_YEARS_DIR, 'min')

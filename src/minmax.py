@@ -1,10 +1,32 @@
 import os
 
 import numpy as np
-import pandas as pd
 
 import consts
-from matrix_getter import get_mat_month
+from matrix_getter import get_mat_day, get_mat_month
+from helpers import get_all_days, matrix_to_csv
+
+
+def max_days():
+    calc_day(np.maximum, consts.MAX_DAY_DIR)
+
+
+def min_days():
+    calc_day(np.minimum, consts.MIN_DAY_DIR)
+
+
+def calc_day(func, out_path):
+    days_to_cnt = get_all_days()
+
+    for day in days_to_cnt:
+        files_to_cnt = get_mat_day(day)
+        val = files_to_cnt[0]
+
+        for mat in files_to_cnt[1:]:
+            val = func(val, mat)
+
+        path = os.path.join(out_path, '%s.csv' % day)
+        matrix_to_csv(val, path)
 
 
 def max_mth():
@@ -24,6 +46,8 @@ def min_yr():
 
 
 def calculate(func, out_path, scope='months'):
+    year_val = None
+
     if func == np.maximum:
         year_val = np.zeros(shape=consts.ARRAY_SIZE)
 
@@ -43,17 +67,11 @@ def calculate(func, out_path, scope='months'):
 
         if scope == 'months':
             path = os.path.join(out_path, '%s.csv' % mth)
-            frame = pd.DataFrame(data=val[1:, 1:],
-                                 index=val[1:, 0],
-                                 columns=val[0, 1:])
-            frame.to_csv(path_or_buf=path)
+            matrix_to_csv(val, path)
 
         if scope == 'years':
             year_val = func(year_val, val)
 
     if scope == 'years':
         path = os.path.join(out_path, consts.YR_FILE)
-        frame = pd.DataFrame(data=year_val[1:, 1:],
-                             index=year_val[1:, 0],
-                             columns=year_val[0, 1:])
-        frame.to_csv(path_or_buf=path)
+        matrix_to_csv(year_val, path)

@@ -1,14 +1,22 @@
 import os
 
 import numpy as np
-import pandas as pd
 
 import consts
-from matrix_getter import get_mat_month
+from matrix_getter import get_mat_month, get_mat_day
+from helpers import get_all_days, matrix_to_csv
 
 
 def cnt_avg_per_day():
-    pass
+    days_to_cnt = get_all_days()
+
+    for day in days_to_cnt:
+        files_to_cnt = get_mat_day(day)
+        sum_ = _sum(files_to_cnt)
+        avg = sum_ / len(files_to_cnt)
+
+        path = os.path.join(consts.AVG_DAY_DIR, '%s.csv' % day)
+        matrix_to_csv(avg, path)
 
 
 def cnt_avg(scope='months'):
@@ -20,10 +28,7 @@ def cnt_avg(scope='months'):
 
         if scope == 'months':
             path = os.path.join(consts.AVG_MONTHS_DIR, '%s.csv' % mth)
-            frame = pd.DataFrame(data=avg[1:, 1:],
-                                 index=avg[1:, 0],
-                                 columns=avg[0, 1:])
-            frame.to_csv(path_or_buf=path)
+            matrix_to_csv(avg, path)
 
         elif scope == 'years':
             year_sum += avg
@@ -31,10 +36,7 @@ def cnt_avg(scope='months'):
     if scope == 'years':
         avg = year_sum / len(consts.MONTHS)
         path = os.path.join(consts.AVG_YEARS_DIR, consts.YR_FILE)
-        frame = pd.DataFrame(data=avg[1:, 1:],
-                             index=avg[1:, 0],
-                             columns=avg[0, 1:])
-        frame.to_csv(path_or_buf=path)
+        matrix_to_csv(avg, path)
 
 
 def _sum(matrices):
