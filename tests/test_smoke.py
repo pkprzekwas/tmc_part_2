@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from src import consts, matrix_getter, helpers, main
+from data_prepare import consts, matrix_getter, helpers, main
 from tests.helpers import gen_days
 
 

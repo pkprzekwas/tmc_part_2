@@ -1,7 +1,7 @@
 import pytest
 
 
-from src.minmax import calculate
+from data_prepare.minmax import calculate
 
 
 @pytest.mark.parametrize('scope', ['months', 'years'])

@@ -2,9 +2,9 @@ import os
 
 import numpy as np
 
-import consts
-from matrix_getter import get_mat_day, get_mat_month
-from helpers import get_all_days, matrix_to_csv
+import data_prepare.consts as consts
+from data_prepare.matrix_getter import get_mat_day, get_mat_month
+from data_prepare.helpers import get_all_days, matrix_to_csv
 
 
 def max_days():

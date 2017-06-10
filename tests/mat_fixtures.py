@@ -7,8 +7,8 @@ import os
 
 import pytest
 
-import src.consts as consts
-from src.matrix_getter import get_mat, get_mat_month
+import data_prepare.consts as consts
+from data_prepare.matrix_getter import get_mat, get_mat_month
 
 
 @pytest.fixture(scope='session')
